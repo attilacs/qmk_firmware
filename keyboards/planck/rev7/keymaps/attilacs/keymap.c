@@ -24,6 +24,67 @@ enum planck_keycodes { COLEMAK = SAFE_RANGE, QWERTY, BACKLIT };
 #define NAV LT(_NAV, KC_ESC)
 #define RAISE MO(_RAISE)
 
+/* Unicode */
+#define AACUTE UP(A_ACUTE_LOWER, A_ACUTE_UPPER)
+#define ADIAERESIS UP(A_DIAERESIS_LOWER, A_DIAERESIS_UPPER)
+#define EACUTE UP(E_ACUTE_LOWER, E_ACUTE_UPPER)
+#define IACUTE UP(I_ACUTE_LOWER, I_ACUTE_UPPER)
+#define OACUTE UP(O_ACUTE_LOWER, O_ACUTE_UPPER)
+#define ODACUTE UP(O_DOUBLE_ACUTE_LOWER, O_DOUBLE_ACUTE_UPPER)
+#define ODIAERESIS UP(O_DIAERESIS_LOWER, O_DIAERESIS_UPPER)
+#define SHARPS UM(S_SHARP)
+#define UACUTE UP(U_ACUTE_LOWER, U_ACUTE_UPPER)
+#define UDACUTE UP(U_DOUBLE_ACUTE_LOWER, U_DOUBLE_ACUTE_UPPER)
+#define UDIAERESIS UP(U_DIAERESIS_LOWER, U_DIAERESIS_UPPER)
+
+enum unicode_names {
+    A_ACUTE_LOWER,        // á
+    A_ACUTE_UPPER,        // Á
+    A_DIAERESIS_LOWER,    // ä
+    A_DIAERESIS_UPPER,    // Ä
+    E_ACUTE_LOWER,        // é
+    E_ACUTE_UPPER,        // É
+    I_ACUTE_LOWER,        // í
+    I_ACUTE_UPPER,        // Í
+    O_ACUTE_LOWER,        // ó
+    O_ACUTE_UPPER,        // Ó
+    O_DOUBLE_ACUTE_LOWER, // ő
+    O_DOUBLE_ACUTE_UPPER, // Ő
+    O_DIAERESIS_LOWER,    // ö
+    O_DIAERESIS_UPPER,    // Ö
+    S_SHARP,              // ß
+    U_ACUTE_LOWER,        // ú
+    U_ACUTE_UPPER,        // Ú
+    U_DOUBLE_ACUTE_LOWER, // ű
+    U_DOUBLE_ACUTE_UPPER, // Ű
+    U_DIAERESIS_LOWER,    // ü
+    U_DIAERESIS_UPPER,    // Ü
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+    [A_ACUTE_LOWER]        = 0x00E1, // á
+    [A_ACUTE_UPPER]        = 0x00C1, // Á
+    [A_DIAERESIS_LOWER]    = 0x00E4, // ä
+    [A_DIAERESIS_UPPER]    = 0x00C4, // Ä
+    [E_ACUTE_LOWER]        = 0x00E9, // é
+    [E_ACUTE_UPPER]        = 0x00C9, // É
+    [I_ACUTE_LOWER]        = 0x00ED, // í
+    [I_ACUTE_UPPER]        = 0x00CD, // Í
+    [O_ACUTE_LOWER]        = 0x00F3, // ó
+    [O_ACUTE_UPPER]        = 0x00D3, // Ó
+    [O_DOUBLE_ACUTE_LOWER] = 0x0151, // ő
+    [O_DOUBLE_ACUTE_UPPER] = 0x0150, // Ő
+    [O_DIAERESIS_LOWER]    = 0x00F6, // ö
+    [O_DIAERESIS_UPPER]    = 0x00D6, // Ö
+    [S_SHARP]              = 0x00DF, // ß
+    [U_ACUTE_LOWER]        = 0x00FA, // ú
+    [U_ACUTE_UPPER]        = 0x00DA, // Ú
+    [U_DOUBLE_ACUTE_LOWER] = 0x0171, // ű
+    [U_DOUBLE_ACUTE_UPPER] = 0x0170, // Ű
+    [U_DIAERESIS_LOWER]    = 0x00FC, // ü
+    [U_DIAERESIS_UPPER]    = 0x00DC, // Ü
+};
+
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -83,20 +144,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
- * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |      |      |      |      |      |      |      |   Ű  |   Ú  |   Ü  |   Ö  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   -  |   =  |   [  |   ]  |  \   |
+ * |      |      |   Ä  |   ß  |   Á  |      |      |   Ő  |   É  |   Í  |   Ó  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO # |ISO / |Pg Up |Pg Dn |      |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_planck_grid(
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-    KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
-    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+    _______, _______, _______,   _______, _______, _______, _______, UDACUTE, UACUTE,  UDIAERESIS, ODIAERESIS, _______,
+    _______, AACUTE, ADIAERESIS, SHARPS,  _______, _______, _______, ODACUTE, EACUTE,  IACUTE,     OACUTE,     _______,
+    _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______,    _______,    _______,
+    _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______,    _______,    _______
 ),
 
 /* Adjust (Lower + Raise)
@@ -114,7 +175,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_planck_grid(
     _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
     _______, EE_CLR,  MU_NEXT, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK, _______, _______, _______,
-    _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
+    UC_NEXT, AU_PREV, AU_NEXT, MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, UC_NEXT,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
