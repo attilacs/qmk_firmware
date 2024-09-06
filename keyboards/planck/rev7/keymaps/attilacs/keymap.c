@@ -16,13 +16,14 @@
 
 #include QMK_KEYBOARD_H
 
-enum planck_layers { _COLEMAK, _QWERTY, _LOWER, _RAISE, _NUMBERS, _ADJUST, _NAV };
+enum planck_layers { _COLEMAK, _QWERTY, _LOWER, _RAISE, _NUMBERS, _ADJUST, _NUMPAD, _NAV };
 
 enum planck_keycodes { COLEMAK = SAFE_RANGE, QWERTY, BACKLIT };
 
 #define LOWER MO(_LOWER)
 #define NAV LT(_NAV, KC_ESC)
 #define NUMBERS MO(_NUMBERS)
+#define NUMPAD TG(_NUMPAD)
 #define RAISE MO(_RAISE)
 
 /* Unicode */
@@ -198,6 +199,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
+/* Numpad
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      | NUML |  7   |  8   |  9   |  -   |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |  4   |  5   |  6   |  +   | PENT |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |  1   |  2   |  3   |  *   |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |Numpad|  0   |      |  .   |  /   |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_NUMPAD] = LAYOUT_planck_grid(
+    _______, _______, _______, _______, _______, _______, KC_NUM,  KC_P7, KC_P8,   KC_P9,   KC_PMNS, _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_P4, KC_P5,   KC_P6,   KC_PPLS, KC_PENT,
+    _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, KC_P1, KC_P2,   KC_P3,   KC_PAST, _______,
+    _______, _______, _______, _______, _______, _______, NUMPAD,  KC_P0, XXXXXXX, KC_PDOT, KC_PSLS, _______
+),
+
 /* NAV
  * ,-----------------------------------------------------------------------------------.
  * |      |Mouse1| MUp  |Mouse2| MWhUp|      |Insert| Home |      | Print|PageUp| Del  |
@@ -213,7 +232,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, _______, KC_INS,  KC_HOME, XXXXXXX, KC_PSCR,  KC_PGUP, KC_DEL,
     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_PGDN, _______,
     _______, KC_WH_L, KC_BTN3, KC_WH_R, _______, _______, KC_MPLY, KC_END,  KC_VOLD, KC_VOLU,  KC_MUTE, _______,
-    _______, _______, _______, _______, XXXXXXX, _______, XXXXXXX, KC_CAPS, KC_MPRV, _______,  _______, KC_MNXT
+    _______, _______, _______, _______, XXXXXXX, _______, NUMPAD,  KC_CAPS, KC_MPRV, _______,  _______, KC_MNXT
 ),
 
 };
