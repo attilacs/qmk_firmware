@@ -232,7 +232,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, _______, KC_INS,  KC_HOME, XXXXXXX, KC_PSCR,  KC_PGUP, KC_DEL,
     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_PGDN, _______,
     _______, KC_WH_L, KC_BTN3, KC_WH_R, _______, _______, KC_MPLY, KC_END,  KC_VOLD, KC_VOLU,  KC_MUTE, _______,
-    _______, _______, _______, _______, XXXXXXX, _______, NUMPAD,  KC_CAPS, KC_MPRV, _______,  _______, KC_MNXT
+    _______, _______, _______, _______, CW_TOGG, _______, NUMPAD,  KC_CAPS, KC_MPRV, _______,  _______, KC_MNXT
 ),
 
 };
