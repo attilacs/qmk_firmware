@@ -18,7 +18,7 @@
 
 enum planck_layers { _COLEMAK, _QWERTY, _LOWER, _RAISE, _NUMBERS, _ADJUST, _NUMPAD, _NAV };
 
-enum planck_keycodes { COLEMAK = SAFE_RANGE, QWERTY, BACKLIT };
+enum planck_keycodes { COLEMAK = SAFE_RANGE, QWERTY, BACKLIT, THOUSAND };
 
 #define LOWER MO(_LOWER)
 #define NAV LT(_NAV, KC_ESC)
@@ -229,10 +229,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_NUMPAD] = LAYOUT_planck_grid(
-    _______, _______, _______, _______, _______, _______, KC_NUM,  KC_P7, KC_P8,   KC_P9,   KC_PMNS, _______,
-    _______, _______, _______, _______, _______, _______, _______, KC_P4, KC_P5,   KC_P6,   KC_PPLS, KC_PENT,
-    _______, _______, _______, DM_PLY1, DM_PLY2, _______, _______, KC_P1, KC_P2,   KC_P3,   KC_PAST, _______,
-    _______, _______, _______, _______, _______, _______, NUMPAD,  KC_P0, XXXXXXX, KC_PDOT, KC_PSLS, _______
+    _______, _______, _______, _______, _______, _______, KC_NUM,  KC_P7, KC_P8,    KC_P9,   KC_PMNS, _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_P4, KC_P5,    KC_P6,   KC_PPLS, KC_PENT,
+    _______, _______, _______, DM_PLY1, DM_PLY2, _______, _______, KC_P1, KC_P2,    KC_P3,   KC_PAST, _______,
+    _______, _______, _______, _______, _______, _______, NUMPAD,  KC_P0, THOUSAND, KC_PDOT, KC_PSLS, _______
 ),
 
 /* NAV
@@ -279,6 +279,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_RSFT);
             } else {
                 unregister_code(KC_RSFT);
+            }
+            return false;
+            break;
+        case THOUSAND:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_P0) SS_TAP(X_P0) SS_TAP(X_P0));
             }
             return false;
             break;
