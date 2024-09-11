@@ -374,4 +374,27 @@ void leader_start_user(void) {
 }
 
 void leader_end_user(void) {
+    // console.log
+    if (leader_sequence_two_keys(KC_J, KC_C)){
+        SEND_STRING("console.log(``);");
+        SEND_STRING(SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT));
+    // NestJS cli
+    } else if (leader_sequence_two_keys(KC_N, KC_N)){
+        SEND_STRING("npx -p @nestjs/cli nest ");
+    // run NestJS project
+    } else if (leader_sequence_two_keys(KC_N, KC_B)){
+        SEND_STRING("npm run start:dev");
+    // Angular cli
+    } else if (leader_sequence_two_keys(KC_N, KC_A)){
+        SEND_STRING("npx -p @angular/cli ng ");
+    // run Angular project
+    } else if (leader_sequence_two_keys(KC_N, KC_F)){
+        SEND_STRING("npm start");
+    // run unit tests
+    } else if (leader_sequence_two_keys(KC_N, KC_T)){
+        SEND_STRING("npm run test:watch");
+    // run e2e tests
+    } else if (leader_sequence_two_keys(KC_N, KC_E)){
+        SEND_STRING("npm run test:e2e:watch");
+    }
 }
